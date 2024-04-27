@@ -93,6 +93,7 @@ var menuLinks = [
   // R-ALAB 316.3.1 - DOM Manipulation (Part Two)
 
   // Parts 1-3
+  
   // Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
 const subMenuEl = document.getElementById("sub-menu");
 //Set the height subMenuEl element to be "100%".
@@ -106,3 +107,21 @@ subMenuEl.classList.add("flex-around");
 subMenuEl.style.position = "absolute";
 //Set the CSS top property of subMenuEl to the value of 0.
 subMenuEl.style.top = 0;
+
+//Part 4: Adding Menu Interaction
+
+/*In order to add submenu links, we will need to restructure the menuLinks array within index.js. 
+Update the menuLinks array to the following: -- added lines 48-76 --- */
+
+//Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
+const topMenuLinks = topMenuEl.getElementsByTagName("a");
+//console.log(topMenuLinks);
+//Attach a delegated 'click' event listener to topMenuEl.
+/* The first line of code of the event listener function should call the event
+ object's preventDefault() method.
+The second line of code of the function should immediately return if 
+the element clicked was not an <a> element.
+Log the content of the <a> to verify the handler is working. */
+topMenuEl.addEventListener("click", (evt) => {
+  evt.preventDefault();
+});
