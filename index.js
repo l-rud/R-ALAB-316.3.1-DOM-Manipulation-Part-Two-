@@ -44,3 +44,65 @@ topMenuEl.classList.add("flex-around");
   { text: "orders", href: "/orders" },
   { text: "account", href: "/account" },
 ]; */
+
+var menuLinks = [
+    { text: "about", href: "/about" },
+    {
+      text: "catalog",
+      href: "#",
+      subLinks: [
+        { text: "all", href: "/catalog/all" },
+        { text: "top selling", href: "/catalog/top" },
+        { text: "search", href: "/catalog/search" },
+      ],
+    },
+    {
+      text: "orders",
+      href: "#",
+      subLinks: [
+        { text: "new", href: "/orders/new" },
+        { text: "pending", href: "/orders/pending" },
+        { text: "history", href: "/orders/history" },
+      ],
+    },
+    {
+      text: "account",
+      href: "#",
+      subLinks: [
+        { text: "profile", href: "/account/profile" },
+        { text: "sign out", href: "/account/signout" },
+      ],
+    },
+  ];
+  const ul = document.createElement("ul");
+  ul.listStyleType = "none";
+  topMenuEl.appendChild(ul);
+  
+  menuLinks.forEach((links) => {
+    const link = document.createElement("li");
+    link.style.display = "inline";
+    link.style.margin = "25px";
+  
+    const aLink = document.createElement("a");
+    aLink.textContent = links.text.toUpperCase();
+    aLink.setAttribute("src", links.href);
+    ul.appendChild(link);
+    link.appendChild(aLink);
+  });
+  
+  // R-ALAB 316.3.1 - DOM Manipulation (Part Two)
+
+  // Parts 1-3
+  // Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
+const subMenuEl = document.getElementById("sub-menu");
+//Set the height subMenuEl element to be "100%".
+subMenuEl.style.height = "100%";
+//Set the background color of subMenuEl to the value stored in the --sub-menu-bg CSS custom property.
+//subMenuEl.style.setProperty("background", "var(--sub-menu-bg)");
+subMenuEl.style.setProperty("background", "var(--sub-menu-bg)");
+//Add the class of flex-around to the subMenuEl element.
+subMenuEl.classList.add("flex-around");
+//Set the CSS position property of subMenuEl to the value of absolute.
+subMenuEl.style.position = "absolute";
+//Set the CSS top property of subMenuEl to the value of 0.
+subMenuEl.style.top = 0;
