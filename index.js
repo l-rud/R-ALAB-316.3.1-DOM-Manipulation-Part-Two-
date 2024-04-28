@@ -113,8 +113,8 @@ subMenuEl.style.top = 0;
 Update the menuLinks array to the following: -- added lines 48-76 --- */
 
 //Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
-//const topMenuLinks = topMenuEl.querySelector("a");
-const topMenuLinks = topMenuEl.getElementsByTagName("a");
+const topMenuLinks = topMenuEl.querySelector("a");
+//const topMenuLinks = topMenuEl.getElementsByTagName("a");
 
 //Attach a delegated 'click' event listener to topMenuEl.
 /* The first line of code of the event listener function should call the event
@@ -122,11 +122,28 @@ const topMenuLinks = topMenuEl.getElementsByTagName("a");
 The second line of code of the function should immediately return if 
 the element clicked was not an <a> element.
 Log the content of the <a> to verify the handler is working. */
+//https://stackoverflow.com/questions/7723188/what-properties-can-i-use-with-event-target
 topMenuEl.addEventListener("click", (event) => {
   event.preventDefault();
-  if (!(event.target.tagName === "A")) {
+  if (!(event.target.nodeName === "A")) {
     return;
   }
   console.log(event.target.innerHTML);
+  const currentBtn = event.target;
+  currentBtn.classList.toggle("active");
 });
+/* Progress Check - Ensure that clicking ABOUT, CATALOG, etc. logs about, catalog, etc. 
+when a link is clicked. Clicking anywhere other than on a link should do nothing.*/
 
+/* Now that we have references to each of these links, and a registered event listener, 
+we will want to add a toggled "active" state to each menu item, showing whether or not 
+it is currently selected: */
+
+/*The event listener should add the active class to the <a> element that was clicked, 
+unless it was already active, in which case it should remove it.
+The event listener should remove the active class from each other <a> element in topMenuLinks - 
+whether the active class exists or not.
+Hint: Removing a non-existent class from an element does not cause an error!
+Progress Check - Clicking any of the links should make that link active and clear the others. 
+Clicking an active link should clear that link. Here is what it should look like so far, 
+with "CATALOG" active: */
