@@ -109,19 +109,24 @@ subMenuEl.style.position = "absolute";
 subMenuEl.style.top = 0;
 
 //Part 4: Adding Menu Interaction
-
 /*In order to add submenu links, we will need to restructure the menuLinks array within index.js. 
 Update the menuLinks array to the following: -- added lines 48-76 --- */
 
 //Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
+//const topMenuLinks = topMenuEl.querySelector("a");
 const topMenuLinks = topMenuEl.getElementsByTagName("a");
-//console.log(topMenuLinks);
+
 //Attach a delegated 'click' event listener to topMenuEl.
 /* The first line of code of the event listener function should call the event
  object's preventDefault() method.
 The second line of code of the function should immediately return if 
 the element clicked was not an <a> element.
 Log the content of the <a> to verify the handler is working. */
-topMenuEl.addEventListener("click", (evt) => {
-  evt.preventDefault();
+topMenuEl.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (!(event.target.tagName === "A")) {
+    return;
+  }
+  console.log(event.target.innerHTML);
 });
+
