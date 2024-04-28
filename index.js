@@ -113,7 +113,7 @@ subMenuEl.style.top = 0;
 Update the menuLinks array to the following: -- added lines 48-76 --- */
 
 //Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
-const topMenuLinks = topMenuEl.querySelector("a");
+const topMenuLinks = topMenuEl.querySelectorAll("a");
 //const topMenuLinks = topMenuEl.getElementsByTagName("a");
 
 //Attach a delegated 'click' event listener to topMenuEl.
@@ -131,6 +131,12 @@ topMenuEl.addEventListener("click", (event) => {
   console.log(event.target.innerHTML);
   const currentBtn = event.target;
   currentBtn.classList.toggle("active");
+
+  for (const item of topMenuLinks) {
+    if (item !== currentBtn) {
+      item.classList.remove("active");
+    }
+  }
 });
 /* Progress Check - Ensure that clicking ABOUT, CATALOG, etc. logs about, catalog, etc. 
 when a link is clicked. Clicking anywhere other than on a link should do nothing.*/
