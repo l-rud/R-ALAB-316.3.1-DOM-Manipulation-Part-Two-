@@ -1,19 +1,47 @@
-//import "./styles.css";
-var menuLinks = [
+
+// Menu data structure
+/*var menuLinks = [
   { text: "about", href: "/about" },
   { text: "catalog", href: "/catalog" },
   { text: "orders", href: "/orders" },
   { text: "account", href: "/account" },
+];*/
+var menuLinks = [
+  { text: "about", href: "/about" },
+  {
+    text: "catalog",
+    href: "#",
+    subLinks: [
+      { text: "all", href: "/catalog/all" },
+      { text: "top selling", href: "/catalog/top" },
+      { text: "search", href: "/catalog/search" },
+    ],
+  },
+  {
+    text: "orders",
+    href: "#",
+    subLinks: [
+      { text: "new", href: "/orders/new" },
+      { text: "pending", href: "/orders/pending" },
+      { text: "history", href: "/orders/history" },
+    ],
+  },
+  {
+    text: "account",
+    href: "#",
+    subLinks: [
+      { text: "profile", href: "/account/profile" },
+      { text: "sign out", href: "/account/signout" },
+    ],
+  },
 ];
-// Menu data structure
 
 //Part 1
 //Select and cache the <main> element in a variable named mainEl.
 const mainEl = document.querySelector("main");
 //Set the background color of mainEl to the value stored in the --main-bg CSS custom property.
 mainEl.style.setProperty("background", "var(--main-bg)");
-/*Set the content of mainEl to <h1>DOM Manipulation</h1>. There are a variety of ways to do this; 
-  pick whichever one that you think works best in this situation.*/
+//Set the content of mainEl to <h1>DOM Manipulation</h1>.
 const h1Tag = document.createElement("h1");
 h1Tag.textContent = "DOM Manipulation";
 mainEl.appendChild(h1Tag);
@@ -38,63 +66,25 @@ topMenuEl.classList.add("flex-around");
   Set the new element's content to the value of the text property of the "link" object.
   Append the new element to the topMenuEl element. */
 
-/*var menuLinks = [
-  { text: "about", href: "/about" },
-  { text: "catalog", href: "/catalog" },
-  { text: "orders", href: "/orders" },
-  { text: "account", href: "/account" },
-]; */
+const ul = document.createElement("ul");
+ul.listStyleType = "none";
+topMenuEl.appendChild(ul);
 
-var menuLinks = [
-    { text: "about", href: "/about" },
-    {
-      text: "catalog",
-      href: "#",
-      subLinks: [
-        { text: "all", href: "/catalog/all" },
-        { text: "top selling", href: "/catalog/top" },
-        { text: "search", href: "/catalog/search" },
-      ],
-    },
-    {
-      text: "orders",
-      href: "#",
-      subLinks: [
-        { text: "new", href: "/orders/new" },
-        { text: "pending", href: "/orders/pending" },
-        { text: "history", href: "/orders/history" },
-      ],
-    },
-    {
-      text: "account",
-      href: "#",
-      subLinks: [
-        { text: "profile", href: "/account/profile" },
-        { text: "sign out", href: "/account/signout" },
-      ],
-    },
-  ];
-  const ul = document.createElement("ul");
-  ul.listStyleType = "none";
-  topMenuEl.appendChild(ul);
-  
-  menuLinks.forEach((links) => {
-    const link = document.createElement("li");
-    link.style.display = "inline";
-    link.style.margin = "25px";
-  
-    const aLink = document.createElement("a");
-    aLink.textContent = links.text.toUpperCase();
-    aLink.setAttribute("src", links.href);
-    ul.appendChild(link);
-    link.appendChild(aLink);
-  });
-  
-  // R-ALAB 316.3.1 - DOM Manipulation (Part Two)
+menuLinks.forEach((links) => {
+  const link = document.createElement("li");
+  link.style.display = "inline";
+  link.style.margin = "25px";
 
-  // Parts 1-3
-  
-  // Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
+  const aLink = document.createElement("a");
+  aLink.textContent = links.text.toUpperCase();
+  aLink.setAttribute("src", links.href);
+  ul.appendChild(link);
+  link.appendChild(aLink);
+});
+
+// R-ALAB 316.3.1 - DOM Manipulation (Part Two)
+
+// Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
 const subMenuEl = document.getElementById("sub-menu");
 //Set the height subMenuEl element to be "100%".
 subMenuEl.style.height = "100%";
@@ -110,7 +100,7 @@ subMenuEl.style.top = 0;
 
 //Part 4: Adding Menu Interaction
 /*In order to add submenu links, we will need to restructure the menuLinks array within index.js. 
-Update the menuLinks array to the following: -- added lines 48-76 --- */
+Update the menuLinks array to the following: -- added lines 9-37 -- */
 
 //Select and cache the all of the <a> elements inside of topMenuEl in a variable named topMenuLinks.
 const topMenuLinks = topMenuEl.querySelectorAll("a");
@@ -130,6 +120,7 @@ topMenuEl.addEventListener("click", (event) => {
   }
   console.log(event.target.innerHTML);
   const currentBtn = event.target;
+  
   currentBtn.classList.toggle("active");
 
   for (const item of topMenuLinks) {
@@ -153,3 +144,5 @@ Hint: Removing a non-existent class from an element does not cause an error!
 Progress Check - Clicking any of the links should make that link active and clear the others. 
 Clicking an active link should clear that link. Here is what it should look like so far, 
 with "CATALOG" active: */
+
+//Part 5: Adding Submenu Interaction
